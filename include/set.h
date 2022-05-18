@@ -11,8 +11,9 @@
 #include <unistd.h>
 
 #define MAXLINE 1024
-#define SERV_PORT 5013
+#define SERV_PORT 8888
 #define SERV_IP "127.0.0.1"
+#define MAXCLIENT 10
 
 #define BLU "\e[30m"
 #define NC "\e[0m"
@@ -38,6 +39,12 @@
 #define TCHK(op)                \
     do {                        \
         if ((errno = (op)) > 0) \
+            alert(1, #op);      \
+    } while (0)
+
+#define SCHK(op)                \
+    do {                        \
+        if ((errno = (op)) < 0) \
             alert(1, #op);      \
     } while (0)
 
