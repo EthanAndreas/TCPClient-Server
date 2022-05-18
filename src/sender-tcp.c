@@ -14,11 +14,11 @@ int main(void) {
     servaddr.sin_port = htons(SERV_PORT);
     inet_pton(AF_INET, SERV_IP, &servaddr.sin_addr);
 
-    // connect
-    connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
+    // create the connection between the client and the server
+    CHK(connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)));
 
-    // send
-    send(sockfd, "init", 4, 0);
+    // send the package to the server
+    send(sockfd, "exit", 4, 0);
 
     // close
     close(sockfd);
