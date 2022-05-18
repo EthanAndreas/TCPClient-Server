@@ -31,8 +31,7 @@ int main(void) {
     fd_set read_fds;
     FD_ZERO(&read_fds);
 
-    buffer[0] = '\0';
-    while (strcmp(buffer, "exit") != 0) {
+    for (;;) {
 
         FD_SET(connect_fd, &read_fds);
         FD_SET(0, &read_fds);
@@ -50,6 +49,10 @@ int main(void) {
             // send the package to the server
             fgets(buffer, MAXLINE, stdin);
             send(connect_fd, buffer, MAXLINE, 0);
+        }
+
+        if (strcmp(buffer, "exit") >= 0) {
+            break;
         }
     }
 
