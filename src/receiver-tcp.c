@@ -45,14 +45,16 @@ int main(void) {
             printf("%s", buffer);
         }
 
-        // // if we receive an information, receive it
-        // if (FD_ISSET(0, &read_fds)) {
-        //     CHK(recv(0, buffer, MAXLINE, 0));
-        //     printf("%s", buffer);
-        // }
+        // if we receive from the keyboard, send it
+        if (FD_ISSET(0, &read_fds)) {
+            // send the package to the server
+            fgets(buffer, MAXLINE, stdin);
+            send(connect_fd, buffer, MAXLINE, 0);
+        }
     }
 
     // close
+    CHK(close(connect_fd));
     CHK(close(socket_fd));
 
     return 0;
