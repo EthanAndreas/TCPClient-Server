@@ -2,13 +2,19 @@ CC = gcc
 CFLAGS = -O0 -pipe -Wall -Werror -Wextra -g 
 LDLIBS ?=
 
-all: receiver-tcp sender-tcp
+all: receiver-unique sender-unique receiver-multi sender-multi
 
-receiver-tcp: src/receiver-tcp.c
-	gcc -o bin/receiver-tcp src/receiver-tcp.c
+receiver-unique: src/receiver-unique.c
+	gcc -o bin/receiver-unique src/receiver-unique.c
 
-sender-tcp: src/sender-tcp.c
-	gcc -o bin/sender-tcp src/sender-tcp.c
+sender-unique: src/sender-unique.c
+	gcc -o bin/sender-unique src/sender-unique.c
+
+receiver-multi: src/receiver-multi.c
+	gcc -o bin/receiver-multi src/receiver-multi.c
+
+sender-multi: src/sender-multi.c
+	gcc -o bin/sender-multi src/sender-multi.c
 
 	@echo "\033[92mCompiled\033[0m"
 
